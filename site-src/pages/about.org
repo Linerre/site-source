@@ -1,0 +1,9 @@
+I am mostly interested in stuff like
++ GNU Emacs
++ GUN/Linux
++ Compilers
++ BlockChain
++ Japanese Anime
+
+
+This website runs on [[https://jaspervdj.be/hakyll/][Hakyll]].

@@ -19,19 +19,28 @@
             LANG = "en_US.UTF-8";
 
             buildInputs = with hpkgs; [
-              # For developing
-              ghc     # 9.4.6 (LTS Stackage)
-              ghcid   # 0.8.9
-              hlint   # 3.5
-              hindent # 6.0.0
+              # GHC 946
+              (ghcWithPackages (p: with p; [
+                # libs
+                hakyll
+                hlint   # 3.5
+                hindent # 6.0.0
+                pandoc
+                # tools
+                cabal-install
+              ]))
 
-              # Blog
-              hakyll      # 4.16.0.0 (latest 4.16.2.0)
+              # Bins
+              ghcid   # 0.8.9
               pandoc-cli  # 0.1.1.1
+              haskell-language-server
             ];
 
             shellHook = ''
               alias e="emacs -nw"
+              alias ll="ls -alh"
+              alias b="ghc -O2 -dynamic --make"
+              alias site="./site"
             '';
           };
         }

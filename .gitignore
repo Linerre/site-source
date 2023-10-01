@@ -1,0 +1,9 @@
+_site/
+_cache/
+.direnv/
+*.o
+*.hi
+*.cabal
+*.rst
+*.markdown
+site
