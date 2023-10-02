@@ -1,0 +1,62 @@
+---
+title: Things I tend to forget when coding
+---
+
+After a few years of learning and doing programming, I now caught myself in situations where I wrote bad(-style) code because I forgot the good.  The reasons may vary but one stands out: I do /not/ really take a concept or definition seriously at the very beginning.  This post is therefore a note for now me and future me.
+
+* Expressions
+** ~if~ block
+I started my programming journey with Python.  In Python's term, ~if~ is a *statement*[fn:1] instead of *expression*.  That means in Python's ~if~ blocks, rarely did I even think about returning a value or result.
+
+In Rust, however, since ~if~ is followed by a =block=, it can also act as expressions[fn:2].  That is to say, it is fairly common in Rust to return a value from a ~if~ block:
+
+#+BEGIN_SRC rust
+// This
+let x = if a != 10 { a } else { a + 1 };
+
+// Instead of this
+let mut x = 0;
+if a != 10 {
+    x = a;
+} else {
+    x = a + 1;
+}
+#+END_SRC
+
+Or in Haskell[fn:3]:
+
+#+BEGIN_SRC haskell
+doubleSmallNumber x = (if x = 10 then x else x*2) + 1
+#+END_SRC
+
+Or in Clojure[fn:4]:
+
+#+BEGIN_SRC clojure
+(if (= a 10)
+  a
+  (* a 2))
+#+END_SRC
+
+
+** boolean expressions
+My die-hard habit is the following:
+
+#+BEGIN_SRC rust
+// Not this
+if x != 10 {
+    correct = false;
+} else {
+    correct = true;
+}
+
+// But this
+correct = x != 10;
+#+END_SRC
+
+In many languages including Java, if an expression evaluates to a boolean value, then I should use the expression's return value directly, not /merely/ evaluating it.
+
+* References
+[fn:1][[https://docs.python.org/3/tutorial/controlflow.html]]
+[fn:2][[https://doc.rust-lang.org/std/keyword.if.html]]
+[fn:3][[https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-320003.6]]
+[fn:4][[https://clojure.org/reference/special_forms#if]]

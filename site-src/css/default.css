@@ -1,33 +1,45 @@
+:root {
+  --bg: #FFF1E5;
+  --fg: #000000;
+}
+
 html {
-  font-size: 62.5%;
+  font-family: "Liberation Sans",sans-serif;
+  font-size: 90%;
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 body {
-  font-size: 1.6rem;
-  color: #000;
+  display: flex;
+  font-size: 1.3rem;
+  color: var(--fg);
 }
 
-header {
-  border-bottom: 0.2rem solid #000;
+.toc {
+  position: fixed;
+  right: 0;
+  top: 10;
 }
 
 nav {
-  text-align: right;
+  text-align: left;
+  disolay: flex;
+  flex-direction: column;
 }
 
 nav a {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: black;
+  color: var(--fg);
   text-decoration: none;
-  text-transform: uppercase;
 }
 
 footer {
   margin-top: 3rem;
   padding: 1.2rem 0;
   border-top: 0.2rem solid #000;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: #555;
 }
 
@@ -41,7 +53,6 @@ h2 {
 
 article .header {
   font-size: 1.4rem;
-  font-style: italic;
   color: #555;
 }
 
@@ -103,30 +114,38 @@ article .header {
   .logo a {
     font-size: 2.4rem;
   }
-  nav a {
-    display: inline;
-    margin: 0 0.6rem;
-  }
+
+  /* nav a { */
+  /*   display: inline; */
+  /*   margin: 0 0.6rem; */
+  /* } */
 }
 
 @media (min-width: 640px) {
   body {
     width: 60rem;
-    margin: 0 auto;
     padding: 0;
   }
   header {
     margin: 0 0 3rem;
     padding: 1.2rem 0;
   }
+
   nav {
-    margin: 0;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin: 1rem 3rem;
+    padding: 1rem 3rem 1rem 0;
+    border-right: 0.2rem solid var(--fg);
+    text-align: left;
   }
+
   nav a {
     margin: 0 0 0 1.2rem;
     display: inline;
   }
+
   footer {
     text-align: right;
   }

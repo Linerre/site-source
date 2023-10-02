@@ -1,9 +1,12 @@
-I am mostly interested in stuff like
+Most of my blogs on this small site are about topics I am interested in:
 + GNU Emacs
 + GUN/Linux
 + Compilers
-+ BlockChain
-+ Japanese Anime
++ Blockchain
++ System Programming
++ Learning Japanese
 
+
+Sometimes I practice writing prose as a way to learn (good) English writing.  I am not a native English speaker though.
 
 This website runs on [[https://jaspervdj.be/hakyll/][Hakyll]].

@@ -26,6 +26,7 @@
                 hlint   # 3.5
                 hindent # 6.0.0
                 pandoc
+                skylighting     # 0.13.4.1
                 # tools
                 cabal-install
               ]))
