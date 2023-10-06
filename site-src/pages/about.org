@@ -1,4 +1,7 @@
-Most of my blogs on this small site are about topics I am interested in:
+I'm quite forgetful, so it's necessary for me to jot down some notes from time to time.  This blog is the result.
+When writing the posts, the main reader in my mind is often me myself.  If you happen to find something helpful to you, my pleasure.
+
+Most of the posts here are about topics I am interested in:
 + GNU Emacs
 + GUN/Linux
 + Compilers
@@ -9,4 +12,4 @@ Most of my blogs on this small site are about topics I am interested in:
 
 Sometimes I practice writing prose as a way to learn (good) English writing.  I am not a native English speaker though.
 
-This website runs on [[https://jaspervdj.be/hakyll/][Hakyll]].
+This website runs on [[https://jaspervdj.be/hakyll/][Hakyll]].  The source code for the site is hosted on [[https://github.com/Linerre/site-source][this GitHub repository]].
