@@ -23,7 +23,7 @@ if a != 10 {
 }
 #+END_SRC
 
-Or in Haskell[fn:3]:
+Or in Haskell[fn:3], the mandatory ~else~ branch requires that something must be returned:
 
 #+BEGIN_SRC haskell
 doubleSmallNumber x = (if x = 10 then x else x*2) + 1
