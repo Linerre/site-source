@@ -1,0 +1,89 @@
+#+TITLE: Leetcode 150 Problems
+
+* 09 Palindrome number
+Given an integer ~x~, return true if ~x~ is a palindrome , and false otherwise.
+** Examples
+Example 1:
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+
+Example 2:
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+Example 3:
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+
+** Solution
+#+BEGIN_SRC cpp
+// Leetcode runtime already includes standard library so there is no
+// need to inlcude <limits.h>
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x < 0) return false;
+        int y = x;
+
+        int z = 0;
+        while(x / 10 >= 1) {
+            z = z * 10 + x % 10;
+            x /= 10;
+
+        }
+        // Check limitation is met: x <= 2^31 - 1
+        if (z >= INT_MAX / 10) return false;
+
+        z = z * 10 + x;
+        return y == z;
+    }
+};
+#+END_SRC
+
+
+* 13 Roman to integer
+- https://leetcode.com/problems/roman-to-integer/description/
+#+BEGIN_SRC cpp
+class Solution {
+public:
+    int romanToInt(string s) {
+        int n = 0;
+        int N = s.size();
+        bool c4or9 = false;
+        for (int i = 0; i < N; ++i) {
+            if (c4or9) {
+                c4or9 = false;
+                continue;
+            }
+
+            if (s[i] == 'I') {
+                int m = s[i+1] == 'V' ? 4 : s[i+1] == 'X' ? 9 : 1;
+                n += m;
+                c4or9 = m == 4 || m == 9 ? true : false;
+            }
+
+            else if (s[i] == 'X') {
+                int m = s[i+1] == 'L' ? 40 : s[i+1] == 'C' ? 90 : 10;
+                n += m;
+                c4or9 = m == 40 || m == 90 ? true : false;
+            }
+
+            else if (s[i] == 'C') {
+                int m = s[i+1] == 'D' ? 400 : s[i+1] == 'M' ? 900 : 100;
+                n += m;
+                c4or9 = m == 400 || m == 900 ? true : false;
+            }
+
+            else if (s[i] == 'V') n += 5;
+            else if (s[i] == 'L') n += 50;
+            else if (s[i] == 'D') n += 500;
+            else if (s[i] == 'M') n += 1000;
+        }
+
+        return n;
+    }
+};
+#+END_SRC
