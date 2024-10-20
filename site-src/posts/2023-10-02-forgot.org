@@ -2,7 +2,7 @@
 title: Things I tend to forget when coding
 ---
 
-After a few years of learning and doing programming, I now caught myself in situations where I wrote bad(-style) code because I forgot the good.  The reasons may vary but one stands out: I do /not/ really take a concept or definition seriously at the very beginning.  This post is therefore a note for now me and future me.
+After a few years of programming, I now often find myself caught in situations where I wrote bad(-style) code because I forgot the good.  The reasons may vary but this one stands out: I do /not/ really take a concept or definition seriously at the very beginning.  This post is therefore a note for now and future me.
 
 * Expressions
 ** ~if~ block
@@ -40,23 +40,110 @@ Or in Clojure[fn:4]:
 
 ** boolean expressions
 My die-hard habit is the following:
-
 #+BEGIN_SRC rust
-// Not this
 if x != 10 {
     correct = false;
 } else {
     correct = true;
 }
+#+END_SRC
 
-// But this
+But why not simply this:
+#+BEGIN_SRC rust
 correct = x != 10;
 #+END_SRC
 
-In many languages including Java, when an expression evaluates to a boolean value, I should use the expression's return value, rather than /merely/ evaluate it.
+In many languages including Java, when an expression evaluates to a value, I should use the expression's return value, rather than /merely/ evaluate it.
 
+
+** ~.length~ v.s. ~len()~
+It's normal to loop over an array using something like
+#+BEGIN_SRC java
+for (int i=0; i<arr.length; i++) // do sth here
+#+END_SRC
+
+In Java the ~length~ property is static and determined at compile time.[fn:5]  That means accessing its value is of ~O(1)~ time complexity.
+
+Yet sometimes, especially for dynamical arrays, using ~len()~ method may have some overhead.  Thus, it is good to store its length in a variable and use that thereafter (assuming the /length/ doesn't change...)
+#+BEGIN_SRC java
+int N = someArr.len();
+for (int i=0; i<N; i++) // do sth here
+#+END_SRC
+
+
+
+
+
+
+** namespace
+I often need to work with a few programming languages at the same time (well, who doesn't).  They have similar concepts and thus can be confused with each other.  Namespace is such an example of confusion.
+
+In C++, as far as Standard Libraries are concerned, I'll need to
+1. ~#include~ any header files into current scope first or ~using namepsace std~ if possible
+2. Use whatever in ~std::<stuff>~
+#+BEGIN_SRC cpp
+#include <string>
+string my_str = "cpp";
+
+// Otherwise
+std::string my_str = "cpp";
+#+END_SRC
+
+In Rust, the ~prelude~ is already quite handy, yet I'll still need to explicitly ~use~ such features as ~std::collection~ (for various maps and so on) and ~std::sync~ for locks.
+#+BEGIN_SRC rust
+let name = "rust"; // &str
+let name2 = String::from("rust"); // No need to include anything for `String'
+
+// But need to explicitly import collections
+use std::collection::HashMap;
+let students = HashMap::<String, u8>::new();
+#+END_SRC
+
+In Clojure, a convenient shorthand is this: mark any vars and fns with double colons ~::~ so that they will be prefixed with current namespace automatically.
+#+BEGIN_SRC clojure
+(ns my-libs)
+
+;; It will become :my-libs/helper when used somewhere else
+(defn ::helper []
+  ;; body
+  )
+#+END_SRC
+
+** initialization with optionally wrong result
+In Rust, when initializing an instance of my own types (usually ~struct~), I can use different function names to indicate different results
+#+BEGIN_SRC rust
+struct Student {
+    name: &str,
+    age: u8,
+}
+
+// For sake of simplicity, I ignore lifecycle of &str here
+impl Student {
+    fn new(name: &str, age: u8) -> Self {
+        Self {name, age}
+    }
+
+    // Indicate it may fail to initialize a new student
+    fn try_new(name &str, age: u8) -> Result<Self, MyError> {
+        Ok(Self {name, age})
+    }
+}
+#+END_SRC
+
+** think about the "forest" all time
+When coding, it's to easy for me to get obsessed with specific implementations/details/steps ... It's good to always keep the whole picture in mind. Thus instead of rushing into coding, I should make good plans:
+#+BEGIN_SRC cpp
+int main()
+  {
+    FirstThing();
+    SecondThing();
+  }
+
+// Then work on FirstThing() and SecondThing(). A basic plan always helps.
+#+END_SRC
 * References
 [fn:1][[https://docs.python.org/3/tutorial/controlflow.html]]
 [fn:2][[https://doc.rust-lang.org/std/keyword.if.html]]
 [fn:3][[https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-320003.6]]
 [fn:4][[https://clojure.org/reference/special_forms#if]]
+[fn:5]https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html
